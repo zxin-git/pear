@@ -1,0 +1,1 @@
+start E:\zx\developer\java\db\jeecg\bin/mysqld --defaults-file=E:\zx\developer\java\db\jeecg\my-large.ini --standalone
