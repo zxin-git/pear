@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ioc xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xsi:noNamespaceSchemaLocation="nutz-ioc-0.1.xsd"> 
+        
+<!-- 填报信息字典表-->
+<obj name="fillDict" type="java.util.HashMap">
+	<args>
+		<map>
+			<item key="app">
+				<map>
+					<item key="appType">
+						<array>
+							<str>生产管理系统</str>
+							<str>生产控制系统</str>
+							<str>管理信息系统</str>
+							<str>网站系统</str>
+							<str>邮件系统</str>
+							<str>其它</str>
+						</array>
+					</item>
+					<item key="serviceObject">
+						<array>
+							<str>外部单位使用对外发布、公众</str>
+							<str>全集团各级单位</str>
+							<str>集团总部人员</str>
+							<str>本板块和直属单位</str>
+							<str>本单位内部使用</str>
+						</array>
+					</item>
+					<item key="netInfo">
+						<array>
+							<str>商 网</str>
+							<str>互联网</str>
+						</array>
+					</item>
+				</map>
+			</item>
+			<item key="web">
+				<map>
+					<item key="">
+						<array>
+							<str>生产管理系统</str>
+							<str>生产控制系统</str>
+							<str>管理信息系统</str>
+							<str>网站系统</str>
+							<str>邮件系统</str>
+							<str>其它</str>
+						</array>
+					</item>
+				</map>
+			</item>
+			<item key="mail">
+				<map>
+					<item key="">
+						<array>
+							<str>生产管理系统</str>
+							<str>生产控制系统</str>
+							<str>管理信息系统</str>
+							<str>网站系统</str>
+							<str>邮件系统</str>
+							<str>其它</str>
+						</array>
+					</item>
+				</map>
+			</item>
+			<item key="orgStaff">
+				<map>
+					<item key="">
+						<array>
+							<str>生产管理系统</str>
+							<str>生产控制系统</str>
+							<str>管理信息系统</str>
+							<str>网站系统</str>
+							<str>邮件系统</str>
+							<str>其它</str>
+						</array>
+					</item>
+				</map>
+			</item>
+		</map>
+	</args>
+</obj>
+</ioc>

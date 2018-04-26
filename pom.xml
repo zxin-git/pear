@@ -21,6 +21,7 @@
   		<package.dir>E:\zx\developer\java\mine\package\mvc</package.dir>
   		
   		
+  		<sshd.version>2.9.0</sshd.version>
   		<jedis.version>2.9.0</jedis.version>
   		<beetl.version>2.5.2</beetl.version>
   		<lucene.version>4.0.0</lucene.version>
@@ -41,6 +42,17 @@
     </properties>
 
     <dependencies>
+    	
+    	<dependency>
+	        <groupId>org.apache.activemq</groupId>
+	        <artifactId>activemq-all</artifactId>
+	        <version>5.13.0</version>
+        </dependency>
+    	<dependency>
+		  <groupId>org.apache.sshd</groupId>
+		  <artifactId>sshd-core</artifactId>
+		  <version>1.7.0</version>
+		</dependency>
     	<dependency>  
 	    	<groupId>org.apache.lucene</groupId>  
 	        <artifactId>lucene-core</artifactId>  

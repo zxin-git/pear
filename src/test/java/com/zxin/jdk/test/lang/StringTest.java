@@ -1,5 +1,7 @@
 package com.zxin.jdk.test.lang;
 
+import org.junit.Test;
+
 public class StringTest {
 	public static void hashCodeTest(){
 		String str = "gdejicbegh";
@@ -25,5 +27,10 @@ public class StringTest {
 	public static void main(String[] args) {
 //		hashCodeTest();
 		equalsTest();
+	}
+	
+	@Test
+	public void strTest(){
+		System.out.println(("cpu利用率").equals("cpu利用率"));
 	}
 }
