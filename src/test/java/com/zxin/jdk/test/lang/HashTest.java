@@ -66,8 +66,8 @@ public class HashTest {
 	}
 	
 	public static void main(String[] args) {
-//		first();
-		table();
+		first();
+//		table();
 //		map();
 	}
 }

@@ -175,4 +175,10 @@ public class Data implements Serializable {
 //		return userId.equals(obj);
 	}
 
+	@Override
+	public int hashCode() {
+		return i++;
+	}
+	int i =0;
+	
 }

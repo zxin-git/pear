@@ -23,4 +23,19 @@ public class ArraysTest {
 		
 	}
 	
+	@Test
+	public void a(){
+		String a = "a";
+		int[] is = {1,2,3,4,5};
+		System.out.println(a+"  "+is[0]);
+		b(a,is);
+		System.out.println(a+"  "+is[0]);
+	}
+	
+	@Test
+	public void b(String a,int[] is){
+		a = "b";
+		is[0]=5;
+	}
+	
 }

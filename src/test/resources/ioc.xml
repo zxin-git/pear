@@ -8,7 +8,7 @@
 		<map>
 			<item key="app">
 				<map>
-					<item key="appType">
+					<item key="appType">	<!-- 系统分类 -->
 						<array>
 							<str>生产管理系统</str>
 							<str>生产控制系统</str>
@@ -18,7 +18,7 @@
 							<str>其它</str>
 						</array>
 					</item>
-					<item key="serviceObject">
+					<item key="serviceObject">	<!-- 服务对象-->
 						<array>
 							<str>外部单位使用对外发布、公众</str>
 							<str>全集团各级单位</str>
@@ -27,9 +27,9 @@
 							<str>本单位内部使用</str>
 						</array>
 					</item>
-					<item key="netInfo">
+					<item key="netInfo">	<!-- 网络平台-->
 						<array>
-							<str>商 网</str>
+							<str>商网</str>
 							<str>互联网</str>
 						</array>
 					</item>
@@ -37,42 +37,159 @@
 			</item>
 			<item key="web">
 				<map>
-					<item key="">
+					<item key="checkWarn">	<!-- 网络安全检测和预警措施 -->
 						<array>
-							<str>生产管理系统</str>
-							<str>生产控制系统</str>
-							<str>管理信息系统</str>
-							<str>网站系统</str>
-							<str>邮件系统</str>
-							<str>其它</str>
+							<str>入侵检测和防御</str>
+							<str>威胁检测和预警</str>
+							<str>流量监测预警</str>
+							<str>其他</str>
+						</array>
+					</item>
+					<item key="borderSecurity">	<!-- 边界安全防护措施 -->
+						<array>
+							<str>网络防火墙</str>
+							<str>应用防火墙(WAF等)</str>
+							<str>防DDos攻击</str>
+							<str>其他</str>
+						</array>
+					</item>
+					<item key="isVirusMalware">	<!-- 计算机病毒恶意代码防护措施 -->
+						<array>
+							<str>有</str>
+							<str>无</str>
+						</array>
+					</item>
+					<item key="isWebTamper">	<!-- 网页防篡改措施 -->
+						<array>
+							<str>有</str>
+							<str>无</str>
+						</array>
+					</item>
+					<item key="isVulnScan">		<!-- 系统漏洞检测和扫描 -->
+						<array>
+							<str>有</str>
+							<str>无</str>
+						</array>
+					</item>
+					<item key="happened">		<!-- 是否发生或通报过安全事件-->
+						<array>
+							<str>是</str>
+							<str>否</str>
 						</array>
 					</item>
 				</map>
 			</item>
 			<item key="mail">
 				<map>
-					<item key="">
+					<item key="mailGateway">		<!-- 邮箱网关 -->
 						<array>
-							<str>生产管理系统</str>
-							<str>生产控制系统</str>
-							<str>管理信息系统</str>
-							<str>网站系统</str>
-							<str>邮件系统</str>
-							<str>其它</str>
+							<str>垃圾邮件拦截</str>
+							<str>病毒附件拦截</str>
+							<str>防钓鱼预警机制</str>
+							<str>DDos攻击</str>
+							<str>其他</str>
+						</array>
+					</item>
+					<item key="accountProtection">	<!-- 账号防护 -->
+						<array>
+							<str>动态验证码</str>
+							<str>多因素认证</str>
+							<str>密码安全控制</str>
+							<str>异地登录提醒</str>
+							<str>其他</str>
+						</array>
+					</item>
+					<item key="encryptProtection">	<!-- 加密保护 -->
+						<array>
+							<str>邮件内容加密传输</str>
+							<str>邮件内容加密存储</str>
+						</array>
+					</item>
+					<item key="monitorCheck">	<!-- 监控审核 -->
+						<array>
+							<str>关键字过滤</str>
+							<str>恶意IP报警</str>
+							<str>详细日志审计</str>
+							<str>其他</str>
+						</array>
+					</item>
+					<item key="securityProtocol">	<!-- 邮件安全协议 -->
+						<array>
+							<str>SPF</str>
+							<str>DKIM</str>
+							<str>rDNS</str>
+							<str>DMARC</str>
+							<str>其他</str>
+						</array>
+					</item>
+					<item key="happened">		<!-- 是否发生或通报过安全事件-->
+						<array>
+							<str>是</str>
+							<str>否</str>
 						</array>
 					</item>
 				</map>
 			</item>
 			<item key="orgStaff">
 				<map>
-					<item key="">
+					<item key="isGroup">	<!-- 是否成立安全小组 -->
 						<array>
-							<str>生产管理系统</str>
-							<str>生产控制系统</str>
-							<str>管理信息系统</str>
-							<str>网站系统</str>
-							<str>邮件系统</str>
-							<str>其它</str>
+							<str>是</str>
+							<str>否</str>
+						</array>
+					</item>
+				</map>
+			</item>
+			<item key="server">
+				<map>
+					<item key="deployType">	<!-- 部署方式 -->
+						<array>
+							<str>自行建设管理</str>
+							<str>外部托管</str>
+							<str>外部租用</str>
+						</array>
+					</item>
+				</map>
+			</item>
+			<item key="levelProtect">
+				<map>
+					<item key="isRank">	<!-- 是否定级-->
+						<array>
+							<str>未定级</str>
+							<str>定级中</str>
+							<str>已定级</str>
+						</array>
+					</item>
+					<item key="level">	<!-- 等级保护等级-->
+						<array>
+							<str>二级</str>
+							<str>三级</str>
+							<str>四级</str>
+						</array>
+					</item>
+					<item key="isRecord">	<!-- 是否备案-->
+						<array>
+							<str>是</str>
+							<str>否</str>
+						</array>
+					</item>
+					<item key="isEvaluate">	<!-- 是否测评-->
+						<array>
+							<str>是</str>
+							<str>否</str>
+						</array>
+					</item>
+					<item key="repairStatus">	<!-- 对测评报告安全隐患的整改情况-->
+						<array>
+							<str>未整改</str>
+							<str>已制定整改方案正组织实施</str>
+							<str>完成整改</str>
+						</array>
+					</item>
+					<item key="isPass">	<!-- 达标情况-->
+						<array>
+							<str>已达到等级保护要求</str>
+							<str>未达到等级保护要求</str>
 						</array>
 					</item>
 				</map>
