@@ -1,6 +1,7 @@
 package com.zxin.jdk.node.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,7 +15,15 @@ public class ListMain {
 //		linkedHashMapTest();
 //		System.out.println(MapThresholdTest(0b1111));
 //		treeMap();
-		hashMap();
+//		hashMap();
+		arraysAsList();
+	}
+	
+	public static void arraysAsList() {
+//		List<String> list = Arrays.asList("a","b","c");
+		List<String> list = new ArrayList<>(Arrays.asList("a","b","c"));
+		list.add("d");
+		
 	}
 	
 	public static void hashMap() {
