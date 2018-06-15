@@ -18,7 +18,7 @@ public class DBUtil {
 	
 	static{
 		// 创建一个数据源
-		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/mvc?useUnicode=true&characterEncoding=UTF-8");
+		dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/zx?useUnicode=true&characterEncoding=UTF-8");
 		dataSource.setUsername("root");
 		dataSource.setPassword("root");
 //		dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3308/tsoc");

@@ -18,9 +18,9 @@ public class CreateTable {
 	
 	@Test
 	public void auth(){
-		dao.create(User.class, false);
-		dao.create(Role.class, false);
-		dao.create(RolePermission.class, false);
+//		dao.create(User.class, false);
+//		dao.create(Role.class, false);
+//		dao.create(RolePermission.class, false);
 		dao.create(ChartBall.class, true);
 //		Sql sql =Sqls.create("");
 //		sql.setCallback(Sqls.callback.entities());

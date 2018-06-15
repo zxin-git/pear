@@ -21,10 +21,11 @@
   		<package.dir>E:\zx\developer\java\mine\package\mvc</package.dir>
   		
   		
+  		<cxf.version>3.2.4</cxf.version>
   		<sshd.version>2.9.0</sshd.version>
   		<jedis.version>2.9.0</jedis.version>
   		<beetl.version>2.5.2</beetl.version>
-  		<lucene.version>4.0.0</lucene.version>
+  		<lucene.version>4.10.4</lucene.version>
   		<es.version>1.7.0</es.version>
   		<ehcache.version>2.8.1</ehcache.version>
   		<quartz.version>2.3.0</quartz.version>
@@ -42,11 +43,54 @@
     </properties>
 
     <dependencies>
+    	
+    	<!-- cxf -->
+    	<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+		    <version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-transports-http-jetty</artifactId>
+		    <version>${cxf.version}</version>
+		</dependency>
+    	<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-frontend-jaxws</artifactId>
+		    <version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-transports-http</artifactId>
+		    <version>${cxf.version}</version>
+		</dependency>
+    	
+    	<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>8.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+    	<dependency>
+		    <groupId>com.thoughtworks.xstream</groupId>
+		    <artifactId>xstream</artifactId>
+		    <version>1.4.10</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+		</dependency>
+		
     	<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5.3</version>
 		</dependency>
+		
     	<dependency>
 	        <groupId>org.apache.activemq</groupId>
 	        <artifactId>activemq-all</artifactId>
