@@ -44,6 +44,13 @@
 
     <dependencies>
     	
+  
+    	<dependency>
+    		<groupId>org.apache.mina</groupId>
+    		<artifactId>mina-core</artifactId>
+    		<version>2.0.19</version>
+    	</dependency> 
+    		
     	<!-- cxf -->
     	<dependency>
 		    <groupId>org.apache.cxf</groupId>
@@ -91,11 +98,11 @@
 		    <version>4.5.3</version>
 		</dependency>
 		
-    	<dependency>
+    	<!-- <dependency>
 	        <groupId>org.apache.activemq</groupId>
 	        <artifactId>activemq-all</artifactId>
 	        <version>5.13.0</version>
-        </dependency>
+        </dependency> -->
     	<dependency>
 		  <groupId>org.apache.sshd</groupId>
 		  <artifactId>sshd-core</artifactId>
@@ -298,6 +305,11 @@
 		    <groupId>org.slf4j</groupId>  
 		    <artifactId>slf4j-api</artifactId>  
 		    <version>1.6.6</version>  
+		</dependency> 
+		<dependency>  
+		    <groupId>org.slf4j</groupId>  
+		    <artifactId>jcl-over-slf4j</artifactId>  
+		    <version>1.6.6</version>  
 		</dependency>  
 		<dependency>  
 		    <groupId>org.slf4j</groupId>  
@@ -344,6 +356,16 @@
 		    <groupId>commons-codec</groupId>
 		    <artifactId>commons-codec</artifactId>
 		    <version>1.11</version>
+		</dependency>
+		<!-- <dependency>
+		    <groupId>commons-configuration</groupId>
+		    <artifactId>commons-configuration</artifactId>
+		    <version>1.6</version>
+		</dependency> -->
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-configuration2</artifactId>
+		    <version>2.2</version>
 		</dependency>
 		
 		<dependency>
