@@ -4,9 +4,12 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import org.apache.commons.codec.Charsets;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.Crypt;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.nutz.castor.Castors;
 
 public class CodecTest {
@@ -55,9 +58,16 @@ public class CodecTest {
 	public static void main(String[] args) {
 //		printAscii();
 //		baseTest64();
-		DigestUtils.md5Hex(bs);
-		System.out.println(Hex.encodeHexString(md5("abc".getBytes())));
-		md5("abc".getBytes());
+//		DigestUtils.md5Hex(bs);
+//		System.out.println(Hex.encodeHexString(md5("abc".getBytes())));
+//		md5("abc".getBytes());
+		System.out.println(DigestUtils.md5Hex("340322199300053000"));
+	}
+	
+	
+	public static void md5Crypt(){
+		String password = "18221287728";
+		
 	}
 	
 

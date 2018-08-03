@@ -6,7 +6,7 @@ import java.lang.Enum;
 import org.nutz.json.Json;
 
 
-public class EnumTest {
+public class EnumTest{
 	
 	
 	public static void main(String[] args) {
@@ -18,5 +18,10 @@ public class EnumTest {
 //		System.out.println(Json.toJson(city1));
 //		System.out.println(Json.toJson(colors));
 		System.out.println(Color.BLANK.ordinal());//序号,0开始
+		System.out.println(Color.BLANK.getName());//序号,0开始
+		System.out.println(Color.BLANK.getName());//序号,0开始
+		System.out.println(Color.BLANK);//序号,0开始
 	}
+	
+	
 }

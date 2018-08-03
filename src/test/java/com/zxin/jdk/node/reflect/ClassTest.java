@@ -1,5 +1,7 @@
 package com.zxin.jdk.node.reflect;
 
+import java.util.List;
+
 public final class ClassTest {
 	public static void main(String[] args) {
 		try {
@@ -14,6 +16,12 @@ public final class ClassTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	
+	public static <T> void  getCls(List<T> list){
+
 	}
 	
 }

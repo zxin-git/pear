@@ -41,16 +41,16 @@ public class BaseController {
 	@Ok("json")
 	public void insert(HttpServletRequest request,Ioc ioc,@Param("..")DataInfo data){
 		String file = request.getParameter("file");
-		try {
-			Part part = request.getPart("file");
-			logger.info("",part);
-			String savePath = request.getServletContext().getRealPath("/WEB-INF/uploadFile/");
-			part.write(savePath+System.currentTimeMillis());
-		} catch (IOException e) {
-			logger.debug("",e);
-		} catch (ServletException e) {
-			logger.debug("",e);
-		}
+//		try {
+//			Part part = request.getPart("file");
+//			logger.info("",part);
+//			String savePath = request.getServletContext().getRealPath("/WEB-INF/uploadFile/");
+//			part.write(savePath+System.currentTimeMillis());
+//		} catch (IOException e) {
+//			logger.debug("",e);
+//		} catch (ServletException e) {
+//			logger.debug("",e);
+//		}
 		logger.info(file);
 	}
 }

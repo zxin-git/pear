@@ -21,12 +21,16 @@ public class First {
                 .build();
         try {
             HttpGet httpget = new HttpGet("http://httpbin.org/basic-auth/user/passwd");
+            HttpGet httpget2 = new HttpGet("http://www.baidu.com");
 
             System.out.println("Executing request " + httpget.getRequestLine());
             CloseableHttpResponse response = httpclient.execute(httpget);
+            CloseableHttpResponse response2 = httpclient.execute(httpget2);
+            
             try {
                 System.out.println("----------------------------------------");
                 System.out.println(response.getStatusLine());
+                System.out.println(response2.getStatusLine());
                 System.out.println(EntityUtils.toString(response.getEntity()));
             } finally {
                 response.close();
