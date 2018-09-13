@@ -2,7 +2,7 @@ package com.zxin.jdk.node.except;
 
 public class ExceptionTest {
 	static int i = 0;
-	public static void main(String[] args) {
+	public static void main1(String[] args) {
 		name();
 		System.out.println(i);
 	}
@@ -15,6 +15,18 @@ public class ExceptionTest {
 			
 		}finally {
 			i=2;
+		}
+	}
+	
+	public static void main(String[] args) {
+		try{
+
+			int a = 100/0;
+		}catch (Exception e) {
+			e.printStackTrace();
+//			System.out.println(e.getMessage());
+			
+
 		}
 	}
 }

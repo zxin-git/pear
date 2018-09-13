@@ -16,5 +16,4 @@ public class User {
         return "User:{userName=" + this.userName + ",email=" + this.email + "}";
     }
 
-    //Getter and Setter...
 }

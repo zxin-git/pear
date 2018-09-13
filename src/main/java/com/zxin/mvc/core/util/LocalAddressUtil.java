@@ -179,7 +179,8 @@ public class LocalAddressUtil {
 	}
 	
 	private static String fetchIpv4() throws SocketException {
-		List<String> ips = getAvailableIpv4s(true);
+//		List<String> ips = getAvailableIpv4s(true);
+		List<String> ips = getAvailableIpv4s(false);
 		if (ips == null || ips.isEmpty())
 			ips = getAvailableIpv4s(false);
 		

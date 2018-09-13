@@ -1,5 +1,7 @@
 package com.zxin.jdk.test.lang;
 
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Test;
 
 public class StringTest {
@@ -32,5 +34,18 @@ public class StringTest {
 	@Test
 	public void strTest(){
 		System.out.println(("cpu利用率").equals("cpu利用率"));
+	}
+	
+	
+	@Test
+	public void testCode(){
+		
+		try {
+			String s = new String("aa撒旦法".getBytes(),"UTF-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -45,13 +45,13 @@ public class CopyUtil {
 	public static void main(String[] args) {
 		// 获取你当前的路径
 
-		File f = new File(CopyUtil.class.getClass().getResource("/").getPath());
+		File f = new File(CopyUtil.class.getResource("/").getPath());
 		System.out.println(f);
 
-		try {
-			CopyUtil.fileCopyNIO("e:/a","e:/b");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			CopyUtil.fileCopyNIO("e:/a","e:/b");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 }
