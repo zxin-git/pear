@@ -12,8 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
-
-import com.alibaba.druid.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @Title AESUtil调用工具类

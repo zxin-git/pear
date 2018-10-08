@@ -38,6 +38,7 @@
         <druid.version>1.0.28</druid.version>
   		<mysql.version>5.1.26</mysql.version>
         <log4j.version>1.2.16</log4j.version>        
+        <slf4j.version>1.7.2</slf4j.version>        
         <junit.version>4.11</junit.version>        
         <jdk.version>1.8</jdk.version>
     </properties>
@@ -329,17 +330,17 @@
     	<dependency>  
 		    <groupId>org.slf4j</groupId>  
 		    <artifactId>slf4j-api</artifactId>  
-		    <version>1.6.6</version>  
+		    <version>${slf4j.version}</version>  
 		</dependency> 
 		<dependency>  
 		    <groupId>org.slf4j</groupId>  
 		    <artifactId>jcl-over-slf4j</artifactId>  
-		    <version>1.6.6</version>  
+		    <version>${slf4j.version}</version>  
 		</dependency>  
 		<dependency>  
 		    <groupId>org.slf4j</groupId>  
 		    <artifactId>slf4j-log4j12</artifactId>  
-		    <version>1.6.6</version>  
+		    <version>${slf4j.version}</version>  
 		</dependency> 
 		<dependency>  
 		    <groupId>log4j</groupId>  

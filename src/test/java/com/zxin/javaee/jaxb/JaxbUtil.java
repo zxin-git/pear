@@ -1,12 +1,19 @@
 package com.zxin.javaee.jaxb;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+/**
+ * Jaxb2.0
+ * @deprecated jdk1.7 use {@link #Jaxb7Util}
+ * @author zxin
+ *
+ */
 public class JaxbUtil {
 
     public static void convertToXml(Object obj, File file) {

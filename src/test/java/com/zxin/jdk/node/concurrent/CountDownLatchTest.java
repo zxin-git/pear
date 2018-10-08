@@ -15,8 +15,7 @@ public class CountDownLatchTest {
 	private static Logger logger = LoggerFactory.getLogger(CountDownLatchTest.class);
 	
 	public static void main(String[] args) {
-		
-		
+		semaphoreTest();
 	}
 	
 //	CountDownLatch一般用于某个线程A等待若干个其他线程执行完任务之后，它才执行；

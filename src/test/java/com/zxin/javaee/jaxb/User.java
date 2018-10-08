@@ -10,6 +10,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * jaxb instance
+ * 
+ * @author zxin
+ *
+ */
+
 @XmlType(propOrder = {"userName","role","menu"})
 @XmlRootElement(name = "user")
 @XmlAccessorOrder(XmlAccessOrder.ALPHABETICAL)

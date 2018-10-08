@@ -28,7 +28,11 @@ public class Jaxb7Util {
     	user.setAge(1);
     	user.setRole("rolessss");
     	user.setBibi("bbbbbb");
-		System.out.println(toXml(user));
+    	String xml = Jaxb7Util.toXml(user);
+    	System.out.println(xml);
+		
+		User user2 = Jaxb7Util.toBean(xml, User.class);
+		System.out.println(user2.equals(user));
 		
 	}
 	

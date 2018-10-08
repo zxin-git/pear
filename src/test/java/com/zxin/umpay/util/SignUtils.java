@@ -20,13 +20,23 @@ public class SignUtils {
 
 	}
 	
-	public static String getSign(Map<String, String> reqMap){
+	public static String batchSign(Map<String, String> reqMap){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("childmerid").append(reqMap.get("childmerid"));
+		buffer.append("datetime").append(reqMap.get("datetime"));
+		buffer.append("funcode").append(reqMap.get("funcode"));
+		buffer.append("license").append(reqMap.get("license"));
+		buffer.append("merid").append(reqMap.get("merid"));
+		buffer.append("transid").append(reqMap.get("transid"));
+		return DigestUtils.md5Hex(buffer.toString());
+	}
+	
+	public static String fontSign(Map<String, String> reqMap){
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("funcode").append(reqMap.get("funcode"));
 		buffer.append("datetime").append(reqMap.get("datetime"));
 		buffer.append("merid").append(reqMap.get("merid"));
 		buffer.append("transid").append(reqMap.get("transid"));
-		
 		return DigestUtils.md5Hex(buffer.toString());
 	}
 }
