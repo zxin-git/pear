@@ -21,13 +21,21 @@ public class HttpTest {
 	
 	public static void main(String[] args){
 		try {
-			String reqXml = new ReqBodyBuilder().funcode("Mkt2000009").license("19y3sym331nanwyzupp2").childmerid("YLZHMYTK")
-					.datetime("20180228103838").size("200").file().sign( (reqMap) -> {return SignUtils.batchSign(reqMap);} ).buildXml();
-			String response = HttpClientUtil.sendByPost(AppEnum.BATCH_PRO.url(), reqXml);
+//			String reqXml = new ReqBodyBuilder().funcode("Mkt2000009").license("19y3sym331nanwyzupp2").childmerid("YLZHMYTK")
+//					.datetime("20180228103838").size("200").file().sign( (reqMap) -> {return SignUtils.batchSign(reqMap);} ).buildXml();
+			String reqXml = new ReqBodyBuilder().funcode("Gup1006357").name("%E6%BB%A1%E9%B8%BF%E5%BF%97").identityNo("150104198211200513").license("4vnvm648tz1inki2qxa2").childmerid("YLZHMYTK").sign().buildXml(); 
+			String response = HttpClientUtil.sendByPost(AppEnum.TEST1.url(), reqXml);
 			System.out.println(response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void e9015() throws Exception{
+		String reqXml = new ReqBodyBuilder().funcode("Mkt2000009").license("19y3sym331nanwyzupp2").childmerid("YLZHMYTK")
+				.datetime("20180228103838").size("200").file().sign( (reqMap) -> {return SignUtils.batchSign(reqMap);} ).buildXml();
+		String response = HttpClientUtil.sendByPost(AppEnum.BATCH_PRO.url(), reqXml);
+		System.out.println(response);
 	}
 }
 

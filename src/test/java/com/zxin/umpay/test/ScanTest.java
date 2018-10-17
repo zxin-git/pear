@@ -24,7 +24,7 @@ public class ScanTest {
 //		ReqBodyBuilder reqBodyBuilder = new ReqBodyBuilder().funcode("Mkt2000009").license("19y3sym331nanwyzupp2").childmerid("YLZHMYTK"); 
 		ReqBodyBuilder reqBodyBuilder = new ReqBodyBuilder().funcode("Gup1006357").name("%E6%BB%A1%E9%B8%BF%E5%BF%97").identityNo("150104198211200513").license("4vnvm648tz1inki2qxa2").childmerid("YLZHMYTK"); 
 //		ScanUtil.scan(new File("D:\\file\\mobile\\mobile.txt"),new CacheHandler(new LimitTask(AppEnum.FONT_UAT_53, reqBodyBuilder, 7, 3).getCache()));
-		ScanUtil.scan(new File("D:\\file\\mobile\\mobile1000.txt"),new CacheHandler(LimitTask.getCache(AppEnum.FONT_UAT_53, reqBodyBuilder, 100, 5)));
+		ScanUtil.scan(new File("D:\\file\\mobile\\mobile10000.txt"),new CacheHandler(LimitTask.newCache(AppEnum.GATEWAY_TEST, reqBodyBuilder, 10, 3)));
 
 		
 	}

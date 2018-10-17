@@ -3,6 +3,8 @@ package com.zxin.umpay.handler;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class LimitBean{
 	
 	private static final Logger logger = LoggerFactory.getLogger(LimitBean.class);
-
+	
 	private final int maximum;
 	
 	private final int per;
@@ -25,13 +27,16 @@ public class LimitBean{
 	
 	private final AtomicInteger count = new AtomicInteger();
 	
-	private final TimerTask refreshTask;
+	private final TimerTask refreshLimitTask;
+
+	private Timer timer;
 	
 	{
-		refreshTask = new TimerTask() {
+		refreshLimitTask = new TimerTask() {
 			@Override
 			public void run() {
-				logger.info("时间 ：{} ，当前tps：[{}]", FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss SSS").format(System.currentTimeMillis()), count.get());
+//				logger.info("时间 ：{} ，当前tps：[{}]", FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss SSS").format(System.currentTimeMillis()), count.get());
+				logger.info("时间 ：{} ，当前流量为每[{}][{}]:[{}]", FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss SSS").format(System.currentTimeMillis()), per, timeUnit ,count.get());
 				//定时刷新总许可
 //				limit.release(maximum - limit.availablePermits());
 				limit.release(count.getAndSet(0));
@@ -49,11 +54,13 @@ public class LimitBean{
 	
 	
 	public void start(){
-		new Timer().scheduleAtFixedRate(refreshTask, new Date(), timeUnit.toMillis(per));
+		timer = new Timer();
+		timer.scheduleAtFixedRate(refreshLimitTask, new Date(), timeUnit.toMillis(per));
 	}
 	
 	public void stop(){
-		refreshTask.cancel();
+		refreshLimitTask.cancel();
+		timer.cancel();
 	}
 
 	
