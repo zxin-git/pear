@@ -11,11 +11,13 @@ public class LoanTest {
 	private static final Logger logger = LoggerFactory.getLogger(LoanTest.class);
 	
 	public static void main(String[] args) {
-		AbsLoan absLoan = new CorpusLoan(20, new BigDecimal(70*10000));
-		printInfo(absLoan);
+//		AbstractLoan absLoan = new InterestLoan(new BigDecimal(70*10000), 30);
+////		AbstractLoan absLoan = new CorpusLoan(new BigDecimal(70*10000), 20);
+//		printInfo(absLoan);
+		System.out.println(InterestLoan.getLoan(20, new BigDecimal(3346)));
 	}
 	
-	public static void printInfo(AbsLoan absLoan){
+	public static void printInfo(AbstractLoan absLoan){
 		System.out.println("贷款总额:\t"+absLoan.loan);
 		System.out.println("总利息:\t"+absLoan.totalInterest().setScale(2, RoundingMode.HALF_UP));
 		for(int i=1; i<=absLoan.time*12; i++){
@@ -24,10 +26,10 @@ public class LoanTest {
 		printA(absLoan, 5);
 	}
 	
-	public static void printA(AbsLoan absLoan, int year){
-		System.out.println(year + "年已还总额\t"+absLoan.hasRepay(year*12));
-		System.out.println(year + "年已还利息\t"+absLoan.hasRepayInterest(year*12));
-		System.out.println(year + "年剩余本金\t"+absLoan.remainCorpus(year*12));
+	public static void printA(AbstractLoan absLoan, int year){
+		System.out.println(year + "年已还总额\t"+absLoan.hasRepay(year*12).setScale(2, RoundingMode.HALF_UP));
+		System.out.println(year + "年已还利息\t"+absLoan.hasRepayInterest(year*12).setScale(2, RoundingMode.HALF_UP));
+		System.out.println(year + "年剩余本金\t"+absLoan.remainCorpus(year*12).setScale(2, RoundingMode.HALF_UP));
 	}
 }
 

@@ -3,7 +3,13 @@ package com.zxin.app.home;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public abstract class AbsLoan implements ILoan{
+/**
+ * 抽象方法
+ * 仅实现依赖年限和利率的方法，不依赖的由接口默认实现，@since jdk1.8 
+ * @author zxin
+ *
+ */
+public abstract class AbstractLoan implements ILoan{
 
 	protected static final int DEFAULT_SCALE = 8;
 	
@@ -13,20 +19,20 @@ public abstract class AbsLoan implements ILoan{
 	
 	protected int time;
 	
-	protected BigDecimal rate = new BigDecimal(Double.toString(4.9/100));
+	protected static BigDecimal rate = new BigDecimal(Double.toString(4.9/100));
 	
-	public AbsLoan(BigDecimal loan, int time){
+	public AbstractLoan(BigDecimal loan, int time){
 		this.loan = loan;
 		this.time = time;
 	}
 	
-	public BigDecimal getMonthRate() {
+	public static BigDecimal getMonthRate() {
 		return rate.divide(new BigDecimal(MONTH_PER_YEAR), DEFAULT_SCALE, RoundingMode.CEILING);
 	}
 	
 	@Override
-	public BigDecimal remainCorpus(int month) {
-		return hasRepayCorpus(this.time*MONTH_PER_YEAR).subtract(hasRepayCorpus(month));
+	public BigDecimal currentInterest(int month) {
+		return remainCorpus(month-1).multiply(getMonthRate());
 	}
 	
 	@Override
@@ -40,14 +46,9 @@ public abstract class AbsLoan implements ILoan{
 	}
 
 	@Override
-	public BigDecimal hasRepay(int month){
-		BigDecimal hasRepay = new BigDecimal(0);
-		for (int i = 1; i <= month; i++) {
-			hasRepay = hasRepay.add(currentRepay(i));
-		}
-		return hasRepay;
-//		return hasRepayCorpus(month).add(hasRepayInterest(month));
-	}
+	public BigDecimal remainRepay(int month){
+		return hasRepay(this.time*MONTH_PER_YEAR).subtract(hasRepay(month));
+	};
 
 	public BigDecimal getLoan() {
 		return loan;

@@ -6,42 +6,36 @@ import java.math.RoundingMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CorpusLoan extends AbsLoan{
+public class CorpusLoan extends AbstractLoan{
 
 	private static final Logger logger = LoggerFactory.getLogger(CorpusLoan.class);
 
-	private BigDecimal averageCorpus;
+	private final BigDecimal averageCorpus;
 	
-	public CorpusLoan(int year, BigDecimal loan) {
-		super(loan,year);
-		this.time = year;
-		this.loan = loan;
+	public CorpusLoan(BigDecimal loan, int time) {
+		super(loan,time);
 		this.averageCorpus = loan.divide(new BigDecimal(time*MONTH_PER_YEAR), DEFAULT_SCALE, RoundingMode.HALF_UP);	//四舍五入请注意
 	}
-	
-	@Override
-	public BigDecimal hasRepayCorpus(int month){
-		return averageCorpus.multiply(new BigDecimal(month));
-	}
-	
-	@Override
-	public BigDecimal currentInterest(int month){
-		return rate.multiply(remainCorpus(month-1)).divide(new BigDecimal(MONTH_PER_YEAR), DEFAULT_SCALE, RoundingMode.CEILING);
-	}
-	
+
 	@Override
 	public BigDecimal currentCorpus(int month){
 		return averageCorpus;
 	}
 	
+	//====>>hasCorpus
+	
 	@Override
-	public BigDecimal hasRepayInterest(int month){
-		BigDecimal hasRepayInterest = new BigDecimal(0);
-		for (int i = 1 ; i <= month; i++) {
-			hasRepayInterest = hasRepayInterest.add(currentInterest(i));
-		}
-		return hasRepayInterest;
-	}	
+	public BigDecimal remainCorpus(int month) {
+		return loan.subtract(hasRepayCorpus(month));
+	}
+	
+	//==================================已由剩余本金 算出当前利息=========================================================================================
+	@Override
+	public BigDecimal currentRepay(int month){
+		return currentCorpus(month).add(currentInterest(month));
+	};
+	
+	//====>>hasRepayInterest
 	
 }
 
