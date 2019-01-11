@@ -109,13 +109,14 @@
 		<dependency>
 		  <groupId>com.arronlong</groupId>
 		  <artifactId>httpclientutil</artifactId>
-		  <version>1.0.1</version>
+		  <version>1.0</version>
 		</dependency>
 		
     	<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
 		    <artifactId>httpclient</artifactId>
-		    <version>4.5.3</version>
+		    <version>4.5</version>
+<!-- 		    <version>4.5.3</version> -->
 		</dependency>
 		
     	<!-- <dependency>
@@ -433,6 +434,12 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
             <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>tomcat-maven-plugin</artifactId>

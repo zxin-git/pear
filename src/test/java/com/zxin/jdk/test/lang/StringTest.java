@@ -28,7 +28,10 @@ public class StringTest {
 	}
 	public static void main(String[] args) {
 //		hashCodeTest();
-		equalsTest();
+//		equalsTest();
+		String a = "abcdefg";
+		System.out.println(change(a));
+		System.out.println(a);
 	}
 	
 	@Test
@@ -47,5 +50,11 @@ public class StringTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public static String change(String str){
+//		str =  str.substring(3);
+		str = str.replaceAll("[\u4e00-\u9fa5]", "").replaceAll("g", "z");
+		return str;
 	}
 }

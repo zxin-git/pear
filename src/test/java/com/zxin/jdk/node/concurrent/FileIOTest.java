@@ -8,7 +8,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.zxin.util.PropertyUtil;
+import com.zxin.util.PropertiesUtil;
 
 public class FileIOTest {
 
@@ -21,7 +21,7 @@ public class FileIOTest {
 				@Override
 				public void run() {
 					try {
-						Properties prop = PropertyUtil.getProperties("beetl.properties");
+						Properties prop = PropertiesUtil.getProperties("beetl.properties");
 						for (Entry<Object, Object> obj : prop.entrySet()) {
 							logger.info(prop.get(obj.getKey())+"");
 						}

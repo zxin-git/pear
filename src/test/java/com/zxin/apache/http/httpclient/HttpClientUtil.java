@@ -16,28 +16,26 @@ import java.util.concurrent.Executors;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.Consts;
 import org.apache.http.Header;
-import org.apache.http.HeaderElement;
-import org.apache.http.HeaderElementIterator;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
-import org.apache.http.conn.ConnectionKeepAliveStrategy;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
 import org.apache.http.conn.ssl.AllowAllHostnameVerifier;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLContextBuilder;
-import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.conn.ssl.TrustStrategy;
 import org.apache.http.entity.StringEntity;
@@ -45,9 +43,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicHeaderElementIterator;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.protocol.HttpContext;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,34 +54,18 @@ import org.slf4j.LoggerFactory;
  * @author
  * @date 2016年7月27日
  */
-@SuppressWarnings({ "deprecation", "unused" })
+//@SuppressWarnings({ "deprecation" })
 public class HttpClientUtil {
 	private final static Logger log = LoggerFactory.getLogger(HttpClientUtil.class);
 
-	static {
-		HttpsURLConnection.setDefaultHostnameVerifier(new AllowAllHostnameVerifier());
-		SSLSocketFactory.getSocketFactory().setHostnameVerifier(new AllowAllHostnameVerifier());
-	}
+	public final static int DEFAULT_REQUEST_TIMEOUT = 10 * 1000;
+
+	public final static int DEFAULT_CONNECT_TIMEOUT = 2 * 1000;
+	
 	public static CloseableHttpClient httpclient;
 
 	// 获得池化得HttpClient
 	static {
-		ConnectionKeepAliveStrategy myStrategy = new ConnectionKeepAliveStrategy() {
-			@Override
-			public long getKeepAliveDuration(HttpResponse response, HttpContext context) {
-				HeaderElementIterator it = new BasicHeaderElementIterator(
-						response.headerIterator(HTTP.CONN_KEEP_ALIVE));
-				while (it.hasNext()) {
-					HeaderElement he = it.nextElement();
-					String param = he.getName();
-					String value = he.getValue();
-					if (value != null && param.equalsIgnoreCase("timeout")) {
-						return Long.parseLong(value) * 1000;
-					}
-				}
-				return 60 * 1000;// 如果没有约定，则默认定义时长为60s
-			}
-		};
 		SSLContext sslcontext = null;
 		try {
 			sslcontext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
@@ -94,36 +74,32 @@ public class HttpClientUtil {
 					return true;
 				}
 			}).build();
-
+			
 		} catch (Exception e) {
 			log.error("初始化https连接池失败：", e);
 		}
 
-		SSLConnectionSocketFactory sslcsf = new SSLConnectionSocketFactory(sslcontext,
-				SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-		HostnameVerifier hostnameVerifier = SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
-		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, hostnameVerifier);
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, NoopHostnameVerifier.INSTANCE);
+
+		//---------------pool------------------------
 		Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory> create()
-				.register("http", PlainConnectionSocketFactory.getSocketFactory()).register("https", sslsf).build();
-		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(
-				socketFactoryRegistry);
+				.register("http", PlainConnectionSocketFactory.getSocketFactory())
+				.register("https", sslsf).build();
+		PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
 		connectionManager.setMaxTotal(500);
 		connectionManager.setDefaultMaxPerRoute(50);
 		httpclient = HttpClients.custom().setConnectionManager(connectionManager).build();
 	}
 	
+	/**
+	 * 静态工具类，不对外提供实例
+	 */
 	private HttpClientUtil() {
+		
 	}
 
-	/**
-	 * 默认的请求超时时间，10秒
-	 */
-	public final static int DEFAULT_REQUEST_TIMEOUT = 10 * 1000;
-	/**
-	 * 默认的响应超时时间，2秒
-	 */
-	public final static int DEFAULT_CONNECT_TIMEOUT = 2 * 1000;
-
+	
+	
 	/**
 	 * 
 	 * @param url
@@ -318,6 +294,39 @@ public class HttpClientUtil {
 		}
 		return result;
 	}
+	
+	public static String sendGet(String url) throws Exception{
+		HttpGet httpGet = new HttpGet(url);
+		RequestConfig config = RequestConfig.custom().setConnectTimeout(DEFAULT_CONNECT_TIMEOUT)
+				.setSocketTimeout(DEFAULT_REQUEST_TIMEOUT).build();
+		httpGet.setConfig(config);
+		
+		String responseContent = null;
+		CloseableHttpResponse resp = null;
+		try {
+			resp = httpclient.execute(httpGet);
+			if (resp.getStatusLine().getStatusCode() == 200) {
+				HttpEntity entity  = resp.getEntity();
+				responseContent = EntityUtils.toString(entity, "UTF-8");
+			}else {
+				HttpEntity entity  = resp.getEntity();
+				log.info("响应的异常信息："+EntityUtils.toString(entity, "UTF-8"));
+				httpGet.abort();
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (resp != null) {
+					resp.close();
+				}
+			} catch (Exception e) {
+				log.error("关闭请求连接失败", e);
+			}
+		}
+		return responseContent;
+	}
+	
 	public static void main(String[] args){
 		try {
 			
@@ -347,4 +356,29 @@ public class HttpClientUtil {
 //				System.out.println(sendByPost("https://103.235.230.237:8444/umpaydc/dataQuery/", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><request></request>"));
 //				Thread.sleep(10);
 	}
+	
+	
+    private static class SSLHandler implements  X509TrustManager, HostnameVerifier{
+		
+		@Override
+		public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+			return new java.security.cert.X509Certificate[]{};
+			//return null;
+		}
+		
+		@Override
+		public void checkServerTrusted(java.security.cert.X509Certificate[] chain,
+				String authType) throws java.security.cert.CertificateException {
+		}
+		
+		@Override
+		public void checkClientTrusted(java.security.cert.X509Certificate[] chain,
+				String authType) throws java.security.cert.CertificateException {
+		}
+
+		@Override
+		public boolean verify(String paramString, SSLSession paramSSLSession) {
+			return true;
+		}
+	};
 }

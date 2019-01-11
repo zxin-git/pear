@@ -1,4 +1,4 @@
-package com.zxin.umpay.handler;
+package com.zxin.umpay.bean;
 
 import java.util.Date;
 import java.util.Timer;
@@ -85,5 +85,15 @@ public class LimitBean{
 		return count;
 	}
 
+	public int getPer() {
+		return per;
+	}
+
+	public AtomicInteger getCount() {
+		return count;
+	}
+
+	
+	
 }
 

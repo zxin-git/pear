@@ -22,6 +22,10 @@ public class ReqBodyBuilder {
 		map.put(HttpMap.DATETIME, FastDateFormat.getInstance("yyyyMMddHHmmss").format(System.currentTimeMillis()));
 	}
 	
+	public static ReqBodyBuilder create(){
+		return new ReqBodyBuilder();
+	}
+	
 	public ReqBodyBuilder(){
 		
 	}

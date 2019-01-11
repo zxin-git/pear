@@ -1,9 +1,9 @@
-package com.zxin.umpay.handler;
+package com.zxin.umpay.task;
 
+import java.io.File;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,8 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.zxin.umpay.app.AppEnum;
+import com.zxin.umpay.bean.LimitBean;
+import com.zxin.umpay.handler.IHandler;
+import com.zxin.umpay.handler.impl.StoreHandler;
 import com.zxin.umpay.http.ReqBodyBuilder;
+import com.zxin.umpay.store.FileStore;
 
+@Deprecated
 public class LimitTask implements Runnable {
 
 	private static final Logger logger = LoggerFactory.getLogger(LimitTask.class);
@@ -94,7 +99,8 @@ public class LimitTask implements Runnable {
 	}
 	
 	public static BlockingQueue<String> newCache(AppEnum app, ReqBodyBuilder reqBodyBuilder, int maxTps, int threadNum){
-		return new LimitTask(new HttpHandler(reqBodyBuilder, app), maxTps, threadNum).cache;
+		return new LimitTask(new StoreHandler(reqBodyBuilder, app, new FileStore(new File("E:/batch.txt"))), maxTps, threadNum).cache;
+//		return new LimitTask(new HttpHandler(reqBodyBuilder, app), maxTps, threadNum).cache;
 	}
 	
 	
