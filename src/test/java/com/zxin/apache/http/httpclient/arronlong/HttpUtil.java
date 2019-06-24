@@ -45,8 +45,9 @@ public class HttpUtil {
 	public static void main(String[] args) {
 		try {
 			HttpClient httpclient = HCB.custom().pool(500, 20).sslpv(SSLProtocolVersion.TLSv1_2).ssl().build();
-			String url = "https://10.102.1.75/v2/dps-registry/tags/list";
-			String html = HttpClientUtil.get(HttpConfig.custom().url(url).client(httpclient));
+			String url = "https://opendevl.fbank.com/pm2/opencallback/callback/passthrough/bg4ice?apiCode=bigdata&apiMethod=iceBingLianFen";
+//			String url = "https://10.102.1.75/v2/dps-registry/tags/list";
+			String html = HttpClientUtil.post(HttpConfig.custom().url(url).json("sdfsda").client(httpclient));
 			System.out.println(html);
 		} catch (HttpProcessException e) {
 			logger.warn("",e);
