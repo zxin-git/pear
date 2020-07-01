@@ -36,7 +36,7 @@
         <captcha.version>1.2.2</captcha.version>
         <nutz.version>1.r.62</nutz.version>
         <druid.version>1.0.28</druid.version>
-  		<mysql.version>5.1.26</mysql.version>
+  		<mysql.version>8.0.16</mysql.version>
         <log4j.version>1.2.16</log4j.version>        
         <slf4j.version>1.7.2</slf4j.version>        
         <junit.version>4.11</junit.version>        
